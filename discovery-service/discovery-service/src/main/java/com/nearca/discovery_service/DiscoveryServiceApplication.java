@@ -1,4 +1,4 @@
-package com.discovey.discovery_service;
+package com.nearca.discovery_service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
