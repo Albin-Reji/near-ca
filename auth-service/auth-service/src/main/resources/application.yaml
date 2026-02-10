@@ -1,17 +1,21 @@
+server:
+  port: 8081
+
 spring:
   application:
     name: auth-service
   datasource:
-    url: jdbc:postgresql://postgres:5432/auth_db
-    username: albin
-    password: albin
+    url: jdbc:postgresql://localhost:5432/auth_db_nearca
+    username: postgres
+    password: Albinreji@30
     driver-class-name: org.postgresql.Driver
 
+
   jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: 'create-drop'
+      ddl-auto: "update"
     show-sql: true
     properties:
-      hibernate: { format_sql: true, dialect: org.hibernate.dialect.PostgreSQLDialect}
-
-
+      hibernate:
+        format_sql: true
