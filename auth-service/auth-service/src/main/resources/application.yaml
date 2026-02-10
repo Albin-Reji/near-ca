@@ -1,3 +1,17 @@
 spring:
   application:
     name: auth-service
+  datasource:
+    url: jdbc:postgresql://postgres:5432/auth_db
+    username: albin
+    password: albin
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: 'create-drop'
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
