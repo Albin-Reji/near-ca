@@ -1,15 +1,27 @@
+version: '3.8'
+
 services:
   postgres:
-    image: 'postgres:16-alpine'
-    container_name: auth_postgres
-    restart: always
+    image: postgres:17-alpine
+    container_name: auth-postgres
     environment:
-      - POSTGRES_DB=auth_db_nearca
-      - POSTGRES_PASSWORD=albin
-      - POSTGRES_USER=albin
+      POSTGRES_DB: auth_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Albinreji@30
     ports:
       - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data\
-volumes:
-  postgres_data:
+
+  auth-service:
+    build: 
+      context: ./auth-service/auth-service
+    container_name: auth-service
+    depends_on:
+      - postgres
+    environment:
+      JWT_SECRET: your_very_long_and_very_secure_secret_key_here
+      JWT_EXPIRATION: 3600000
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/auth_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: Albinreji@30
+    ports:
+      - "8081:8081"

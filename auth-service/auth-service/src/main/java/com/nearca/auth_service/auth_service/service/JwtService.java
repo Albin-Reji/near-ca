@@ -24,9 +24,14 @@ public class JwtService {
 
 
     private static final Logger logger = LoggerFactory.getLogger(JwtService.class);
-    private final Dotenv dotenv = Dotenv.load();
+    private final Dotenv dotenv = Dotenv.configure()
+            .ignoreIfMissing() // This prevents the crash you're seeing
+            .load();
+
+    // These will now pull from Docker environment variables if .env is missing
     private final String jwtSecret = dotenv.get("JWT_SECRET");
-    private final Long jwtExpiration = Long.valueOf(dotenv.get("JWT_EXPIRATION"));
+    private final String jwtExpirationStr = dotenv.get("JWT_EXPIRATION");
+    private final Long jwtExpiration = (jwtExpirationStr != null) ? Long.valueOf(jwtExpirationStr) : 3600000L;
     private final UserRepository userRepository;
 
     @Autowired
