@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,11 +20,11 @@ import io.jsonwebtoken.security.Keys;
 
 @Service
 public class JwtService {
-    @Value("${jwt.secret}")
-    private String jwtSecret;
 
-    @Value("${jwt.expiration}")
-    private long jwtExpiration;
+
+    private final Dotenv dotenv=Dotenv.load();
+    private final String jwtSecret=dotenv.get("JWT_SECRET");
+    private final Long jwtExpiration= Long.valueOf(dotenv.get("JWT_EXPIRATION"));
 
     private static final Logger logger= LoggerFactory.getLogger(JwtService.class);
 

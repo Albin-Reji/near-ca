@@ -12,7 +12,7 @@ spring:
       ddl-auto: 'create-drop'
     show-sql: true
     properties:
-      hibernate: { format_sql: true, dialect: org.hibernate.dialect.PostgreSQLDialect
+      hibernate: { format_sql: true, dialect: org.hibernate.dialect.PostgreSQLDialect}
 
 jwt:
  secret: "nearca-secret-key-very-long-for-hmac-256"
