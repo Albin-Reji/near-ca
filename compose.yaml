@@ -1,6 +1,23 @@
 version: '3.8'
 
 services:
+  #service discovery configuration
+  discovery-service:
+    build:
+      context: ./discovery-service/discovery-service
+      dockerfile: Dockerfile
+    container_name: discovery-service
+    ports:
+      - "8761:8761"
+
+  # gateway service configration
+  gateway-service:
+    build:
+      context: ./gateway-service/gateway-service
+      dockerfile: Dockerfile
+    container_name: gateway-service
+    ports:
+      - "8080:8080"
   postgres:
     image: postgres:17-alpine
     container_name: auth-postgres
@@ -10,7 +27,7 @@ services:
       POSTGRES_PASSWORD: Albinreji@30
     ports:
       - "5432:5432"
-
+# auth-service configuration
   auth-service:
     build: 
       context: ./auth-service/auth-service
@@ -25,3 +42,5 @@ services:
       SPRING_DATASOURCE_PASSWORD: Albinreji@30
     ports:
       - "8081:8081"
+
+    

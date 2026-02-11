@@ -41,7 +41,8 @@ public class JwtService {
 
     public String generateToken(String email) {
         logger.info("generate token method initiated");
-        System.err.println(jwtSecret + " " + jwtExpiration);
+        logger.info("JWT Secret: {}", jwtSecret);
+        logger.info("JWT Expiration: {}", jwtExpiration);
 
         Map<String, Object> claims = new HashMap<>();
 
