@@ -1,10 +1,12 @@
 package com.nearca.gateway_service.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 
+@Configuration
 @EnableWebFluxSecurity
 public class SecurityConfig {
 
@@ -16,9 +18,7 @@ public class SecurityConfig {
                 .formLogin(ServerHttpSecurity.FormLoginSpec::disable)
                 .httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)
                 .authorizeExchange(exchanges -> exchanges
-                        .pathMatchers("/api/auth/**").permitAll()   // login, register
-                        .pathMatchers("/public/**").permitAll()
-                        .anyExchange().authenticated()          // EVERYTHING ELSE
+                        .pathMatchers("/api/auth/**").permitAll()   // login, register.anyExchange().authenticated()          // EVERYTHING ELSE
                 )
                 .build();
     }
