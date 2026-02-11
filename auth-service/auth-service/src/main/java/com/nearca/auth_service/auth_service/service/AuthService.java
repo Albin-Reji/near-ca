@@ -33,10 +33,10 @@ public class AuthService {
         /* Token Generation */
         String token =jwtService.generateToken(savedUser.getEmail());
 
-        AuthResponse response=new AuthResponse();
-        response.setToken(token);
-        response.setRole(Role.USER.name());
-        return response;
+        return AuthResponse.builder()
+                .token(token)
+                .role(Role.USER.name())
+                .build();
 
     }
     private  Users builder(RegisterRequest request){

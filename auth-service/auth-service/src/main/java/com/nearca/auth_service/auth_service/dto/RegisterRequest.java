@@ -13,19 +13,4 @@ public class RegisterRequest {
     private String fullName;
     private String mobileNumber;
 
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public String getMobileNumber() {
-        return mobileNumber;
-    }
 }

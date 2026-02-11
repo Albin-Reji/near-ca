@@ -1,5 +1,9 @@
 version: '3.8'
 
+networks:
+  nearca-network:
+    driver: bridge
+
 services:
   #service discovery configuration
   discovery-service:
@@ -27,6 +31,8 @@ services:
       POSTGRES_PASSWORD: Albinreji@30
     ports:
       - "5432:5432"
+    networks:
+      - nearca-network
 # auth-service configuration
   auth-service:
     build: 
@@ -42,5 +48,7 @@ services:
       SPRING_DATASOURCE_PASSWORD: Albinreji@30
     ports:
       - "8081:8081"
+    networks:
+      - nearca-network
 
     
