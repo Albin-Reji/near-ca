@@ -1,20 +1,21 @@
 package com.nearca.gateway_service.filter;
 
 import com.nearca.gateway_service.util.JwtUtil;
+import org.springframework.cloud.gateway.filter.GatewayFilterChain;
+import org.springframework.cloud.gateway.filter.GlobalFilter;
+import org.springframework.core.Ordered;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
-import org.springframework.web.server.WebFilter;
-import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
 
 @Component
-public class JwtAuthenticationFilter implements WebFilter {
+public class JwtAuthenticationFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange,
-                             WebFilterChain chain) {
+                             GatewayFilterChain chain) {
 
         String authHeader = exchange.getRequest()
                 .getHeaders()
@@ -34,5 +35,12 @@ public class JwtAuthenticationFilter implements WebFilter {
         }
 
         return chain.filter(exchange); // allow request
+    }
+
+
+
+    @Override
+    public int getOrder() {
+        return -1;
     }
 }
